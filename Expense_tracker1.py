@@ -9,7 +9,7 @@ from sqlalchemy import create_engine, Column, Integer, String, Float, Date, Fore
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
 from passlib.context import CryptContext
-from datetime import datetime
+from datetime import datetime, timedelta
 from jose import JWTError, jwt
 
 app = FastAPI()
@@ -89,7 +89,7 @@ def login_user(user: UserLogin, db: Session = Depends(get_db)):
     return {"message": "Login Successful"}
 
 # JWT Token Generation
-SECRET_KEY
+SECRET_KEY = "your secret key"
 ALGORITHM = "HS256"
 
 def create_access_token(data: dict):

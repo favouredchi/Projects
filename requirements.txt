@@ -1,1 +1,4 @@
 Sqlalchemy
+jose
+passlib
+jwt
