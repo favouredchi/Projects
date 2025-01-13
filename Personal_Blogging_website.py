@@ -1,6 +1,6 @@
 # Create a Personal Blogging Website with the following endpoints: 
 # #return a list of articles, Return a single article, Create a new article, 
-# Updatea  single article, Delete a single article, Update a single article, Delete a single article
+# Updatea  single article, Delete a single article
 
 from fastapi import FastAPI, HTTPException, Depends
 from sqlalchemy.orm import Session
