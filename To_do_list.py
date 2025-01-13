@@ -1,10 +1,39 @@
-# Create a to_do list application that allows users to create, read, update, and delete tasks.
+# Create a to_do list application that allows users to create, read, update, and delete tasks
 
-# Create a session
+from fastapi import FastAPI, Depends, HTTPException
+from sqlalchemy import create_engine, Column, Integer, String, Boolean
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker, Session
+from pydantic import BaseModel
+
+app = FastAPI()
+
+# Database Setup
+DATABASE_URL = "sqlite:///./todo.db"
+engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+Base = declarative_base()
 
-# Create the table
+# Model
+class Task(Base):
+       __tablename__ = "tasks"
+       id = Column(Integer, primary_key=True, index=True)
+       title = Column(String, index=True)
+       description = Column(String, nullable=True)
+       completed = Column(Boolean, default=False)
+
+# Create Database
 Base.metadata.create_all(bind=engine)
+
+# Pydantic Schema
+class TaskCreate(BaseModel):
+    title: str
+    description: str = None
+
+class TaskUpdate(BaseModel):
+    title: str = None
+    description: str = None
+    completed: bool = None
 
 # Dependency
 def get_db():
