@@ -1,6 +1,6 @@
 # Create an expense tracker that allows users to track their expenses. The service should have the following features:
 # Sign up a new user, generate and validate a JWT authentication and user session, list and filter past expenses(past week, last month. last 3 months, custom start and end date) 
-# add new expenses, remove existing expenses, update existing expenses, update expenses.
+# add new expenses, remove existing expenses, update existing expenses.
 
 from fastapi import FastAPI, HTTPException, Depends
 from pydantic import BaseModel
