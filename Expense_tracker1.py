@@ -3,17 +3,14 @@
 # Add a New Expense, Remove an Expense, Update an Expense, List Past Expenses, Filter by(Last week, Last month, Last 3 months,Custom date range)
 
 import os 
-from fastapi import FastAPI, HTTPException, Depends, status
+from fastapi import FastAPI, HTTPException, Depends
 from pydantic import BaseModel
 from sqlalchemy import create_engine, Column, Integer, String, Float, Date, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
 from passlib.context import CryptContext
 from datetime import datetime, timedelta
-from jose import JWTError 
 import jwt
-import cjson as json
-import json
 
 app = FastAPI()
 

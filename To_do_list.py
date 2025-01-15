@@ -5,6 +5,7 @@ from sqlalchemy import create_engine, Column, Integer, String, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
 from pydantic import BaseModel
+from typing import Type, Any, Optional
 
 app = FastAPI()
 
@@ -17,6 +18,7 @@ Base = declarative_base()
 # Model
 class Task(Base):
        __tablename__ = "tasks"
+       __table_args__ = {"extend_existing": True}
        id = Column(Integer, primary_key=True, index=True)
        title = Column(String, index=True)
        description = Column(String, nullable=True)
@@ -86,14 +88,3 @@ def delete_task(task_id: int, db: Session = Depends(get_db)):
     db.delete(task)
     db.commit()
     return
-
-# Define a Task model
-class Task(Base):
-    __tablename__ = "tasks"
-
-    id = Column(Integer, primary_key=True, index=True)
-    title = Column(String, index=True)
-    content = Column(String)
-
-
-
